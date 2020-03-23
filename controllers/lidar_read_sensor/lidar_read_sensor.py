@@ -31,7 +31,7 @@ rightMotor = robot.getMotor('right wheel')
 leftMotor.setPosition(float('inf'))
 rightMotor.setPosition(float('inf'))
 #keyboard
-keyboard = Keyboard() #it could be keyboard = Keyboard()
+keyboard = robot.getKeyboard() #it could be keyboard = Keyboard()
 keyboard.LEFT = 314
 keyboard.UP = 315
 keyboard.RIGHT = 316
@@ -78,20 +78,18 @@ def scan_lidar():
     Lidar1.enablePointCloud()
     #Lidar_range = Lidar1.getRangeImage()
     #print ("lidar distances in m:",Lidar_range[0:5])
-    Points = Lidar1.getPointCloud()
-    Points_Propierties = LidarPoint()
-    if isinstance(Points, list):
-        print("your object is a list !")
-    else:
-        print("your object is not a list")
+    Lidar_h_r = Lidar1.getHorizontalResolution()
+    print("the getHorizontalResolution is:", Lidar_h_r)
+    Layer = Lidar1.getNumberOfLayers()
+    for points in Lidar1.getPointCloud():
+        print("cordinates:", -points.x,-points.y,-points.z)
     NumberofPoints = Lidar1.getNumberOfPoints()
     print("number of points:",NumberofPoints)
     Lidar_fov = Lidar1.getFov()
     print("lidar FOv:",Lidar_fov)
     Lidar_frecuency = Lidar1.getFrequency()
     print("the frecuency is:",Lidar_frecuency)
-    Lidar_h_r = Lidar1.getHorizontalResolution()
-    print("the getHorizontalResolution is:", Lidar_h_r)
+
 
 def clear_screen():
     Lidar1.disablePointCloud()
